@@ -7,6 +7,8 @@ import { CATEGORIES, TASKS } from "../data";
 console.log("Here's the data you're working with");
 console.log({ CATEGORIES, TASKS });
 
+
+
 function App() {
   return (
     <div className="App">

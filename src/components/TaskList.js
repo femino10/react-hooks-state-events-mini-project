@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import Task from './Task';
+import CategoryButton from './CategoryButton';
 
-function TaskList() {
+const TaskList = ({ tasks, categories, onCategoryClick }) => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategoryClick = category => {
+    setSelectedCategory(category);
+    onCategoryClick(category);
+  };
+
   return (
-    <div className="tasks">
-      {/* display a list of tasks using Task component */}
+    <div>
+      <div>
+        {categories.map(category => (
+          <CategoryButton
+            key={category}
+            category={category}
+            onClick={handleCategoryClick}
+          />
+        ))}
+      </div>
+      <ul>
+        {tasks
+          .filter(task => !selectedCategory || task.category === selectedCategory)
+          .map(task => (
+            <Task key={task.id} text={task.text} />
+          ))}
+      </ul>
     </div>
   );
-}
+};
+
 
 export default TaskList;
